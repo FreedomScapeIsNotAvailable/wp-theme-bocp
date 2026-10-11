@@ -21,6 +21,12 @@ installed once per site and never touched by updates.
 Site-specific customisation belongs in a child theme or in the Customizer, never in `bocp/`,
 so that updates never overwrite it.
 
+## Child themes per site
+
+`dist/children/<site>-child.zip` holds the small per-site child themes (two files each: style.css
+and functions.php) so the connector can install them remotely. They never self-update; edit them
+here, rebuild the zip, and re-install with overwrite.
+
 ## Updates
 
 The theme updates itself from this repository. `style.css` declares an `Update URI`, and
