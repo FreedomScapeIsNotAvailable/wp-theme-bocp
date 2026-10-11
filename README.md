@@ -42,6 +42,4 @@ See the docstring in `build.py`: bump the version in `bocp/style.css` and `BOCP_
 
 ## Notes for other sites
 
-- `inc/mirror-sync.php` mirrors one cloudsales.ro page into bocp.ro hourly. It is specific to
-  bocp.ro and must be disabled or reconfigured before the theme runs elsewhere.
 - `inc/admin-setup.php` contains a BOCP setup assistant with bocp.ro-specific links.

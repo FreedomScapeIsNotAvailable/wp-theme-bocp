@@ -121,3 +121,16 @@ function bocp_widgets_init() {
 	) ) );
 }
 add_action( 'widgets_init', 'bocp_widgets_init' );
+
+/**
+ * One-time cleanup: the former mirror-sync module (removed in 1.2.3) left an hourly cron event
+ * behind on sites that ran it. Unschedule it once, then remember that it is done.
+ */
+function bocp_cleanup_mirror_cron() {
+	if ( get_option( 'bocp_mirror_cron_cleaned' ) ) {
+		return;
+	}
+	wp_clear_scheduled_hook( 'bocp_mirror_sync_event' );
+	update_option( 'bocp_mirror_cron_cleaned', 1, false );
+}
+add_action( 'init', 'bocp_cleanup_mirror_cron' );

@@ -1,10 +1,10 @@
 {
   "name": "BOCP",
   "slug": "bocp",
-  "version": "1.2.2",
-  "package": "https://raw.githubusercontent.com/FreedomScapeIsNotAvailable/wp-theme-bocp/main/dist/bocp-1.2.2.zip",
+  "version": "1.2.3",
+  "package": "https://raw.githubusercontent.com/FreedomScapeIsNotAvailable/wp-theme-bocp/main/dist/bocp-1.2.3.zip",
   "requires": "6.0",
   "requires_php": "7.4",
   "tested": "6.7",
-  "changelog": "<h4>1.2.2</h4><ul><li>Generic block content styling (buttons, quotes, tables, columns, media, separators) in the theme palette, for sites whose pages use standard Gutenberg blocks or Elementor rather than the BOCP section classes.</li><li>Header and drawer buttons keep white text even when a page builder sets a global link colour.</li></ul>"
+  "changelog": "<h4>1.2.3</h4><ul><li>Removed the mirror-sync module (bocp.ro copying a cloudsales.ro page hourly); both sites now include the live price script directly. Its leftover cron event is unscheduled once on update.</li></ul>"
 }

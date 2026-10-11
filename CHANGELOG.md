@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.3
+- Removed the mirror-sync module (bocp.ro copying a cloudsales.ro page hourly); both sites now include the live price script directly. Its leftover cron event is unscheduled once on update.
+
 ## 1.2.2
 - Generic block content styling (buttons, quotes, tables, columns, media, separators) in the theme palette, for sites whose pages use standard Gutenberg blocks or Elementor rather than the BOCP section classes.
 - Header and drawer buttons keep white text even when a page builder sets a global link colour.
