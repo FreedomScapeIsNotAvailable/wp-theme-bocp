@@ -1,0 +1,10 @@
+{
+  "name": "BOCP",
+  "slug": "bocp",
+  "version": "1.0.0",
+  "package": "https://raw.githubusercontent.com/FreedomScapeIsNotAvailable/wp-theme-bocp/main/dist/bocp.zip",
+  "requires": "6.0",
+  "requires_php": "7.4",
+  "tested": "6.7",
+  "changelog": "<h4>1.0.0</h4><ul><li>Initial theme as deployed on bocp.ro.</li></ul>"
+}

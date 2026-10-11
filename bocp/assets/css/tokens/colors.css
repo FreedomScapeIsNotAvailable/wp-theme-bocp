@@ -1,0 +1,61 @@
+/* BOCP — Color tokens (static fallback defaults).
+   --color-primary / --color-primary-hover / --color-primary-active /
+   --bocp-black / --bocp-red-soft / --bocp-red-border are recalculated from
+   the Customizer (Aspect > Personalizare > Culori brand) and injected as an
+   inline <style> by inc/enqueue.php — these values are only the fallback
+   used before that runs (and the safety net if inline output is stripped). */
+:root {
+  /* Brand base */
+  --bocp-red: #dc2626;
+  --bocp-red-hover: #b91c1c;
+  --bocp-red-active: #991b1b;
+  --bocp-red-soft: #fef2f2;
+  --bocp-red-border: #fecaca;
+  --bocp-black: #000000;
+  --bocp-white: #ffffff;
+
+  /* Neutral ramp (cool-neutral grays) */
+  --gray-50:  #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+
+  /* Semantic status */
+  --success: #16a34a;
+  --success-soft: #f0fdf4;
+  --warning: #d97706;
+  --warning-soft: #fffbeb;
+  --danger: #dc2626;
+  --danger-soft: #fef2f2;
+  --info: #2563eb;
+  --info-soft: #eff6ff;
+
+  /* Semantic aliases */
+  --color-primary: var(--bocp-red);
+  --color-primary-hover: var(--bocp-red-hover);
+  --color-primary-active: var(--bocp-red-active);
+  --color-secondary: var(--bocp-black);
+
+  --bg-page: var(--bocp-white);
+  --surface-card: var(--bocp-white);
+  --surface-sunken: var(--gray-50);
+  --surface-hover: var(--gray-100);
+
+  --text-strong: var(--gray-900);
+  --text-body: var(--gray-700);
+  --text-muted: var(--gray-500);
+  --text-on-primary: var(--bocp-white);
+  --text-on-dark: var(--bocp-white);
+
+  --border-subtle: var(--gray-200);
+  --border-default: var(--gray-300);
+  --border-strong: var(--gray-400);
+
+  --focus-ring: rgba(220, 38, 38, 0.35);
+}

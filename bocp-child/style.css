@@ -1,0 +1,21 @@
+/*
+Theme Name: BOCP Child
+Theme URI: https://reallife.solutions
+Template: bocp
+Author: Real Life S.R.L.
+Author URI: https://reallife.solutions
+Description: Child theme pentru BOCP. Aici pui orice personalizare proprie (CSS, template-uri suprascrise, funcții extra), fără riscul ca un update al temei bocp să o șteargă.
+Version: 1.0.0
+Requires at least: 6.0
+Requires PHP: 7.4
+Text Domain: bocp-child
+
+Cum suprascrii un fișier din tema părinte:
+Copiază fișierul respectiv din wp-content/themes/bocp/ (ex.
+page-templates/template-home.php sau template-parts/nav.php) în acest
+folder, la EXACT aceeași cale, apoi editează copia de aici — WordPress o va
+folosi automat pe cea din child theme.
+
+Orice CSS adăugat mai jos se încarcă DUPĂ stilurile temei părinte (vezi
+functions.php), deci poate suprascrie orice regulă din assets/css/site.css.
+*/

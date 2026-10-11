@@ -1,0 +1,57 @@
+/* Loaded LAST inside both editors — the token files and site.css are passed
+   as separate array entries to add_editor_style() (see inc/editor.php),
+   NOT @imported from this file: relative @import inside an editor-injected
+   stylesheet does not reliably resolve inside the Block Editor's iframe —
+   confirmed live, the whole design system silently failed to load there,
+   leaving the canvas as plain unstyled text with no colors/buttons/cards.
+   This file only holds the small editor-only tweaks that should apply
+   after everything else has already loaded correctly. */
+
+/* WP always applies the `editor-styles-wrapper` class as the styling
+   scope for the Block Editor's iframe, and `body#tinymce` for the classic
+   TinyMCE iframe — targeting both is the one pair of selectors that
+   reliably reaches each editor. */
+
+/* site.css sets `body { overflow-x: hidden }` for the real front-end page
+   (to stop decorative elements causing a horizontal scrollbar) — but
+   setting overflow-x on a lone axis implicitly turns the WHOLE body into a
+   scroll/clipping container (overflow-y computes to "auto"). Inside the
+   Block Editor's iframe, that body is exactly where WP renders each
+   selected block's floating toolbar (move/duplicate/more) as an
+   absolutely-positioned popover — so it was being silently clipped: no JS
+   error, the block is still selectable/editable, the toolbar is just
+   invisible. Reset overflow back to the browser default here only. */
+.editor-styles-wrapper,
+body#tinymce {
+	overflow: visible !important;
+}
+
+/* Fonts/background/colors are safe to share with the Block Editor's
+   .editor-styles-wrapper. Deliberately NOT forcing max-width/margin/padding
+   there (unlike the Classic Editor body below): the Block Editor positions
+   its per-block toolbars (move/duplicate/more-options) and selection
+   outlines relative to this same wrapper, and overriding its box model
+   with !important broke that positioning — blocks looked "impossible to
+   edit" because their toolbars landed in the wrong place. */
+.editor-styles-wrapper {
+	background: var(--bg-page);
+	font-family: var(--font-sans);
+}
+
+/* Classic Editor (TinyMCE) has no such per-block floating toolbars, so the
+   centered canvas trick is safe here. */
+body#tinymce {
+	max-width: 1160px;
+	margin: 0 auto;
+	padding: 20px 28px !important;
+	background: var(--bg-page);
+	font-family: var(--font-sans);
+}
+
+/* The editor canvas has no header/footer/nav chrome around the content, so
+   a sticky/fixed .nav (as on the real page) would just sit awkwardly at
+   the top while editing — keep it in normal flow here instead. */
+.editor-styles-wrapper .nav,
+body#tinymce .nav {
+	position: static;
+}
