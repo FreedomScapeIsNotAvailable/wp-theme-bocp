@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2
+- Generic block content styling (buttons, quotes, tables, columns, media, separators) in the theme palette, for sites whose pages use standard Gutenberg blocks or Elementor rather than the BOCP section classes.
+- Header and drawer buttons keep white text even when a page builder sets a global link colour.
+
 ## 1.2.1
 - Release manifest cached one hour instead of six, and refreshed on demand by the connector (ai_wp_before_update_check).
 
