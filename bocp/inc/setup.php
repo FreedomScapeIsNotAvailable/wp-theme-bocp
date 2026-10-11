@@ -52,8 +52,37 @@ function bocp_setup() {
 	// from Aspect > Widgets: drag any widget (menu, text, custom HTML) into
 	// a column, reorder/add/remove freely, no theme code involved.
 	register_nav_menus( array(
-		'primary' => __( 'Meniu principal (header)', 'bocp' ),
+		'primary'   => __( 'Meniu principal (header)', 'bocp' ),
+		'secondary' => __( 'Meniu secundar (bară sub header)', 'bocp' ),
 	) );
+
+	// Lets Yoast SEO (where installed) render its breadcrumbs through the theme (page.php, single.php).
+	add_theme_support( 'yoast-seo-breadcrumbs' );
+}
+
+/** The sticky header is taller when the secondary bar renders; CSS uses this class to compensate. */
+function bocp_body_classes( $classes ) {
+	if ( has_nav_menu( 'secondary' ) ) {
+		$classes[] = 'has-nav-secondary';
+	}
+	return $classes;
+}
+add_filter( 'body_class', 'bocp_body_classes' );
+
+/**
+ * Breadcrumbs for plain page/post templates: Yoast's when the plugin is active and the user
+ * enabled breadcrumbs, otherwise a simple Home > Title trail. Pages using the canvas template
+ * keep whatever crumbs their content contains.
+ */
+function bocp_the_breadcrumbs() {
+	if ( function_exists( 'yoast_breadcrumb' ) ) {
+        $crumbs = yoast_breadcrumb( '<div class="crumbs">', '</div>', false );
+		if ( $crumbs ) {
+			echo $crumbs;
+			return;
+		}
+	}
+	echo '<div class="crumbs"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Acasă', 'bocp' ) . '</a>' . bocp_icon( 'arrowNext' ) . '<span>' . esc_html( get_the_title() ) . '</span></div>';
 }
 add_action( 'after_setup_theme', 'bocp_setup' );
 

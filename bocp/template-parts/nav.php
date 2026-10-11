@@ -1,8 +1,13 @@
 <?php
 /**
- * Sticky header nav + mobile drawer. Menu items come from the "Meniu
- * principal (header)" WP nav menu (Aspect > Meniuri) — nothing here is
- * hardcoded, so it works the same on any site that assigns its own menu.
+ * Sticky header nav + optional secondary bar + mobile drawer.
+ *
+ * Menu items come from the WP nav menus assigned in Aspect > Meniuri:
+ *  - "Meniu principal (header)"           -> the row next to the logo
+ *  - "Meniu secundar (bară sub header)"   -> a second row under it; the bar only
+ *    renders when a menu is assigned, so sites that don't need it see no change.
+ * Both appear in the mobile drawer, one after the other. Nothing here is
+ * hardcoded, so it works the same on any site that assigns its own menus.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $front_page_id = (int) get_option( 'page_on_front' );
 $home_url      = $front_page_id ? get_permalink( $front_page_id ) : home_url( '/' );
 $has_menu      = has_nav_menu( 'primary' );
+$has_secondary = has_nav_menu( 'secondary' );
 ?>
 <header class="nav">
 	<div class="wrap nav-inner">
@@ -27,7 +33,7 @@ $has_menu      = has_nav_menu( 'primary' );
 
 		<div class="nav-right">
 			<?php if ( $has_menu ) : ?>
-				<nav class="nav-links">
+				<nav class="nav-links" aria-label="<?php esc_attr_e( 'Meniu principal', 'bocp' ); ?>">
 					<?php
 					wp_nav_menu( array(
 						'theme_location' => 'primary',
@@ -50,6 +56,25 @@ $has_menu      = has_nav_menu( 'primary' );
 			</button>
 		</div>
 	</div>
+
+	<?php if ( $has_secondary ) : ?>
+		<div class="nav-secondary">
+			<div class="wrap">
+				<nav class="nav-links nav-links-secondary" aria-label="<?php esc_attr_e( 'Meniu secundar', 'bocp' ); ?>">
+					<?php
+					wp_nav_menu( array(
+						'theme_location' => 'secondary',
+						'container'      => false,
+						'items_wrap'     => '%3$s',
+						'link_before'    => '',
+						'link_after'     => '',
+						'walker'         => new BOCP_Nav_Walker(),
+					) );
+					?>
+				</nav>
+			</div>
+		</div>
+	<?php endif; ?>
 </header>
 
 <div class="drawer-scrim"></div>
@@ -67,18 +92,34 @@ $has_menu      = has_nav_menu( 'primary' );
 		</button>
 	</div>
 
-	<?php if ( $has_menu ) : ?>
-		<nav class="drawer-links">
-			<?php
-			wp_nav_menu( array(
-				'theme_location' => 'primary',
-				'container'      => false,
-				'items_wrap'     => '%3$s',
-				'walker'         => new BOCP_Drawer_Walker(),
-			) );
-			?>
-		</nav>
-	<?php endif; ?>
+	<div class="drawer-scroll">
+		<?php if ( $has_menu ) : ?>
+			<nav class="drawer-links" aria-label="<?php esc_attr_e( 'Meniu principal', 'bocp' ); ?>">
+				<?php
+				wp_nav_menu( array(
+					'theme_location' => 'primary',
+					'container'      => false,
+					'items_wrap'     => '%3$s',
+					'walker'         => new BOCP_Drawer_Walker(),
+				) );
+				?>
+			</nav>
+		<?php endif; ?>
+
+		<?php if ( $has_secondary ) : ?>
+			<div class="drawer-sep"></div>
+			<nav class="drawer-links" aria-label="<?php esc_attr_e( 'Meniu secundar', 'bocp' ); ?>">
+				<?php
+				wp_nav_menu( array(
+					'theme_location' => 'secondary',
+					'container'      => false,
+					'items_wrap'     => '%3$s',
+					'walker'         => new BOCP_Drawer_Walker(),
+				) );
+				?>
+			</nav>
+		<?php endif; ?>
+	</div>
 
 	<div class="drawer-cta">
 		<?php echo bocp_get_nav_cta_buttons( true ); ?>
