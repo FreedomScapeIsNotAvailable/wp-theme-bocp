@@ -2,7 +2,7 @@
   "name": "BOCP",
   "slug": "bocp",
   "version": "1.2.1",
-  "package": "https://raw.githubusercontent.com/FreedomScapeIsNotAvailable/wp-theme-bocp/main/dist/bocp.zip",
+  "package": "https://raw.githubusercontent.com/FreedomScapeIsNotAvailable/wp-theme-bocp/main/dist/bocp-1.2.1.zip",
   "requires": "6.0",
   "requires_php": "7.4",
   "tested": "6.7",
