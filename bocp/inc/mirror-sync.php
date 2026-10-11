@@ -40,8 +40,8 @@ function bocp_mirror_sources() {
 			'local_slug'           => 'alege-pachetul-potrivit-businessului-tau',
 			'local_title_fallback' => __( 'Alege pachetul potrivit businessului tău', 'bocp' ),
 			'link_rewrites'        => array(
-				'/contact/'                           => 'https://bocp.ro/new-contact/',
-				'/testeaza-aplicatia-bocp-cloudsales/' => 'https://bocp.ro/new-contact/',
+				'/contact/'                           => 'https://bocp.ro/contact/',
+				'/testeaza-aplicatia-bocp-cloudsales/' => 'https://bocp.ro/contact/',
 			),
 		),
 	);

@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BOCP_VERSION', '1.0.0' );
+define( 'BOCP_VERSION', '1.1.0' );
 define( 'BOCP_DIR', get_template_directory() );
 define( 'BOCP_URI', get_template_directory_uri() );
 
@@ -26,3 +26,4 @@ require_once BOCP_DIR . '/inc/cf7-compat.php';
 require_once BOCP_DIR . '/inc/admin-setup.php';
 require_once BOCP_DIR . '/inc/patterns.php';
 require_once BOCP_DIR . '/inc/mirror-sync.php';
+require_once BOCP_DIR . '/inc/self-update.php';
