@@ -21,8 +21,12 @@ define( 'BOCP_PACKAGE_PREFIX', 'https://raw.githubusercontent.com/FreedomScapeIs
 add_filter( 'update_themes_github.com', 'bocp_check_theme_update', 10, 4 );
 add_action( 'init', 'bocp_enable_theme_auto_update_once' );
 add_action( 'upgrader_process_complete', 'bocp_purge_after_theme_update', 10, 2 );
+// The AI WP Site Manager connector fires this before a forced update check: forget the cached manifest.
+add_action( 'ai_wp_before_update_check', function () {
+	delete_site_transient( 'bocp_theme_manifest' );
+} );
 
-/** Fetch and cache the release manifest for six hours. */
+/** Fetch and cache the release manifest for one hour. */
 function bocp_fetch_manifest( $force = false ) {
 	$cached = get_site_transient( 'bocp_theme_manifest' );
 	if ( ! $force && is_array( $cached ) ) {
@@ -42,7 +46,7 @@ function bocp_fetch_manifest( $force = false ) {
 	if ( 0 !== strpos( $manifest['package'], BOCP_PACKAGE_PREFIX ) ) {
 		return false; // only ever download from the repository itself
 	}
-	set_site_transient( 'bocp_theme_manifest', $manifest, 6 * HOUR_IN_SECONDS );
+	set_site_transient( 'bocp_theme_manifest', $manifest, HOUR_IN_SECONDS );
 	return $manifest;
 }
 

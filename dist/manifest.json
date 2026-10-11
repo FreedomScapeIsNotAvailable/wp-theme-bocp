@@ -1,10 +1,10 @@
 {
   "name": "BOCP",
   "slug": "bocp",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "package": "https://raw.githubusercontent.com/FreedomScapeIsNotAvailable/wp-theme-bocp/main/dist/bocp.zip",
   "requires": "6.0",
   "requires_php": "7.4",
   "tested": "6.7",
-  "changelog": "<h4>1.2.0</h4><ul><li>Second menu location \"Meniu secundar (bar\u0103 sub header)\": renders a bar under the header, and in the mobile drawer, only when a menu is assigned.</li><li>Dropdowns of any depth: level 2+ open as side flyouts on desktop (flip left at the viewport edge) and as nested accordions in the drawer; \"#\" parent items open their submenu instead of jumping.</li><li>Parent items of the current page are highlighted; the drawer menu list scrolls when long.</li><li>Breadcrumbs on plain page and post templates come from Yoast SEO when it is active, with a Home > Title fallback.</li><li>Mirror sync only runs on bocp.ro (filter bocp_mirror_enabled to opt in elsewhere); no cron event is created on other sites.</li></ul>"
+  "changelog": "<h4>1.2.1</h4><ul><li>Release manifest cached one hour instead of six, and refreshed on demand by the connector (ai_wp_before_update_check).</li></ul>"
 }
