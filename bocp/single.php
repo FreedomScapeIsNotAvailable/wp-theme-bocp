@@ -16,11 +16,7 @@ get_header();
 		while ( have_posts() ) :
 			the_post();
 			?>
-			<div class="crumbs">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Acasă', 'bocp' ); ?></a>
-				<?php echo bocp_icon( 'arrowNext' ); ?>
-				<span><?php the_title(); ?></span>
-			</div>
+				<?php bocp_the_breadcrumbs(); ?>
 			<h1 class="h-display"><?php the_title(); ?></h1>
 			<p class="lead muted" style="margin-top:12px">
 				<?php echo esc_html( get_the_date() ); ?>

@@ -123,9 +123,9 @@ h1,h2,h3,h4,p { margin: 0; }
   width: 44px; height: 48px; border: 0; background: none; color: var(--text-muted); cursor: pointer;
 }
 .drawer-submenu-toggle svg { width: 18px; height: 18px; transition: transform var(--dur-fast) var(--ease-standard); }
-.drawer-item.open .drawer-submenu-toggle svg { transform: rotate(180deg); }
+.drawer-item.open > .drawer-item-row .drawer-submenu-toggle svg { transform: rotate(180deg); }
 .drawer-submenu { max-height: 0; overflow: hidden; transition: max-height var(--dur-base) var(--ease-standard); }
-.drawer-item.open .drawer-submenu { max-height: 600px; }
+.drawer-item.open > .drawer-submenu { max-height: 4000px; }
 .drawer-sublink {
   display: block; padding: 11px 12px 11px 24px;
   font-size: 15px; font-weight: 500; color: var(--text-body); text-decoration: none; border-radius: var(--radius-sm); min-height: 44px;
@@ -134,6 +134,33 @@ h1,h2,h3,h4,p { margin: 0; }
 .drawer-sublink.is-active { color: var(--color-primary); font-weight: 600; background: var(--bocp-red-soft); }
 
 .drawer-cta { margin-top: auto; display: flex; flex-direction: column; gap: 10px; padding-top: 16px; border-top: 1px solid var(--border-subtle); }
+
+/* ---- Secondary bar under the header (renders only when a menu is assigned to "secondary") ---- */
+.nav-secondary { display: none; border-top: 1px solid var(--border-subtle); }
+.nav-secondary .nav-links { display: flex; align-items: center; gap: 2px; min-height: 44px; flex-wrap: wrap; }
+.nav-secondary .nav-link { font-size: 13.5px; padding: 6px 10px; }
+/* In-page anchors must clear the taller sticky header on sites with the second bar. */
+.has-nav-secondary [id] { scroll-margin-top: calc(var(--nav-h) + 44px + var(--space-4)); }
+
+/* ---- Dropdown levels 2+: flyouts to the side ---- */
+.nav-dropdown { max-height: calc(100vh - var(--nav-h) - 24px); overflow-y: auto; }
+.nav-sub { position: relative; }
+.nav-dropdown-link.has-children { display: flex; align-items: center; gap: 8px; }
+.nav-dropdown-link.has-children .nav-link-caret { margin-left: auto; transform: rotate(-90deg); }
+.nav-flyout { top: -6px; left: 100%; margin-top: 0; margin-left: 4px; }
+.nav-flyout.flip { left: auto; right: 100%; margin-left: 0; margin-right: 4px; }
+.nav-sub.has-flyout:hover > .nav-flyout,
+.nav-sub.has-flyout:focus-within > .nav-flyout { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-sub.has-flyout:hover > .nav-dropdown-link .nav-link-caret,
+.nav-sub.has-flyout:focus-within > .nav-dropdown-link .nav-link-caret { transform: rotate(-90deg); }
+
+/* ---- Drawer: nested accordions, one indent step per level; the whole list scrolls ---- */
+.drawer-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.drawer-sep { height: 1px; background: var(--border-subtle); margin: 4px 0; }
+.drawer-item-row .drawer-sublink { flex: 1; }
+.drawer-submenu .drawer-submenu .drawer-sublink { padding-left: 36px; font-size: 14px; }
+.drawer-submenu .drawer-submenu .drawer-submenu .drawer-sublink { padding-left: 48px; }
+.drawer-link.is-placeholder, .drawer-sublink.is-placeholder { cursor: pointer; }
 
 /* ---- Eyebrow / kicker ---- */
 .kicker {
@@ -586,6 +613,7 @@ h2 + .faq,
   .section { padding-top: 76px; padding-bottom: 76px; }
   .section-tight { padding-top: 52px; padding-bottom: 52px; }
   .nav-links { display: flex; }
+  .nav-secondary { display: block; }
   .nav-cta { display: flex; }
   .nav-burger { display: none; }
   .hero { padding-top: 64px; padding-bottom: 72px; }

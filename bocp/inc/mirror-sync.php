@@ -33,6 +33,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *             bocp.ro, not the source site) ]
  */
 function bocp_mirror_sources() {
+	// The mirrored pages are bocp.ro-specific. Other sites running this theme get an empty list
+	// unless they opt in: add_filter( 'bocp_mirror_enabled', '__return_true' ) in a child theme.
+	$host    = strtolower( (string) wp_parse_url( home_url(), PHP_URL_HOST ) );
+	$enabled = apply_filters( 'bocp_mirror_enabled', in_array( $host, array( 'bocp.ro', 'www.bocp.ro' ), true ) );
+	if ( ! $enabled ) {
+		return array();
+	}
 	return array(
 		'cloudsales-pachete' => array(
 			'source_url'           => 'https://www.cloudsales.ro/alege-pachetul-potrivit-businessului-tau/',
@@ -146,6 +153,9 @@ function bocp_run_mirror_sync() {
 add_action( 'bocp_mirror_sync_event', 'bocp_run_mirror_sync' );
 
 function bocp_schedule_mirror_sync() {
+	if ( ! bocp_mirror_sources() ) {
+		return; // nothing to mirror on this site: don't create the hourly cron event
+	}
 	if ( ! wp_next_scheduled( 'bocp_mirror_sync_event' ) ) {
 		wp_schedule_event( time(), 'hourly', 'bocp_mirror_sync_event' );
 	}

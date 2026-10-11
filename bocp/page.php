@@ -17,6 +17,7 @@ get_header();
 		while ( have_posts() ) :
 			the_post();
 			?>
+			<?php bocp_the_breadcrumbs(); ?>
 			<h1 class="h-display"><?php the_title(); ?></h1>
 			<div class="entry-content" style="margin-top:24px">
 				<?php the_content(); ?>
