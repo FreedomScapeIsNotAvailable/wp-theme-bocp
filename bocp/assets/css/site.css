@@ -188,6 +188,13 @@ h1,h2,h3,h4,p { margin: 0; }
 .entry-content .wp-block-separator { border-color: var(--border-subtle); margin: 2em auto; }
 .elementor-heading-title { color: var(--text-strong); }
 
+/* Elementor buttons without their own colours follow the theme's primary button (widgets with custom
+   colours keep them: their generated selectors are more specific). */
+.elementor-widget-button .elementor-button, .elementor-widget-button .elementor-button:hover {
+  background-color: var(--color-primary); color: #fff; border-radius: var(--radius-sm); font-weight: 600;
+}
+.elementor-widget-button .elementor-button:hover { filter: brightness(0.92); }
+
 /* Page builders (Elementor) ship a global link colour that would recolour the header/drawer buttons;
    keep the theme's buttons white-on-primary regardless. */
 body .nav-cta .btn-primary, body .drawer-cta .btn-primary, body .nav-cta .btn-primary:hover, body .drawer-cta .btn-primary:hover { color: #fff; }

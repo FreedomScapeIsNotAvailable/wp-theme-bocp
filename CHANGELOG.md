@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.4
+- Elementor buttons without custom colours use the theme primary button style.
+
 ## 1.2.3
 - Removed the mirror-sync module (bocp.ro copying a cloudsales.ro page hourly); both sites now include the live price script directly. Its leftover cron event is unscheduled once on update.
 
