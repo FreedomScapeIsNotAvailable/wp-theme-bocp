@@ -5,7 +5,10 @@ the block editor for content, a sticky header with a WordPress-menu-driven navig
 drawer, four footer widget areas, Customizer-driven colours, fonts, logo and company data, and
 self-hosted IBM Plex fonts. No page builder required.
 
-The theme folder is `bocp/`. The rest of this repository is release tooling.
+The theme folder is `bocp/`. `bocp-child/` is a minimal child theme to copy and rename per site
+(for example `cloudsales-child`) for site-specific CSS, template overrides and hooks. The rest of
+the repository is release tooling. Only `bocp/` is packaged and self-updates; child themes are
+installed once per site and never touched by updates.
 
 ## Install on a site
 
