@@ -1,11 +1,11 @@
 {
   "name": "BOCP",
   "slug": "bocp",
-  "version": "1.2.6",
-  "package": "https://raw.githubusercontent.com/FreedomScapeIsNotAvailable/wp-theme-bocp/main/dist/bocp-1.2.6.zip",
+  "version": "1.2.7",
+  "package": "https://raw.githubusercontent.com/FreedomScapeIsNotAvailable/wp-theme-bocp/main/dist/bocp-1.2.7.zip",
   "requires": "6.0",
   "requires_php": "7.4",
   "tested": "6.7",
-  "sha256": "b3f8a50fcfdc61d108c636ff6853167769a51281fb3927e85065bfa1d482b51c",
-  "changelog": "<h4>1.2.6</h4><ul><li>Security: the release manifest carries a sha256 of the theme zip, and the self-updater refuses a package that does not match it. Release builds are cleaner: build.py zips only tracked theme files.</li></ul>"
+  "sha256": "b8cc837c859272caec80184e95802a077d875937315480a8d1717eb77a8677b8",
+  "changelog": "<h4>1.2.7</h4><ul><li>Default page template: pages whose content is a placeholder for generated sections ({INCLUDE:...} or {bocp_...}), such as the price page, use the full site width instead of the 820px reading column.</li></ul>"
 }
