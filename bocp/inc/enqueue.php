@@ -88,6 +88,12 @@ function bocp_customizer_inline_css() {
 	$css .= "--focus-ring:" . bocp_rgba_from_hex( $primary, 0.35 ) . ';';
 	$css .= '}';
 
+	// Optional colour for the header menu links (Customizer: BOCP — Culori brand). Empty = theme default.
+	$nav_link = sanitize_hex_color( get_theme_mod( 'bocp_nav_link_color', '' ) );
+	if ( $nav_link ) {
+		$css .= ".nav-links .nav-link{color:{$nav_link}}.nav-secondary .nav-link{color:var(--text-body)}";
+	}
+
 	$font_choice = get_theme_mod( 'bocp_font_choice', 'plex' );
 	if ( 'system' === $font_choice ) {
 		$css .= ':root{--font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --font-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;}';

@@ -85,6 +85,17 @@ function bocp_customize_register( $wp_customize ) {
 	) ) );
 
 	/* ---------------- Fonts ---------------- */
+	$wp_customize->add_setting( 'bocp_nav_link_color', array(
+		'default'           => '',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'transport'         => 'refresh',
+	) );
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bocp_nav_link_color', array(
+		'label'       => __( 'Culoare linkuri meniu principal (opțional)', 'bocp' ),
+		'description' => __( 'Lasă gol pentru culoarea implicită a temei. Bara secundară de sub header își păstrează culoarea.', 'bocp' ),
+		'section'     => 'bocp_colors',
+	) ) );
+
 	$wp_customize->add_section( 'bocp_fonts', array(
 		'title'    => __( 'BOCP — Fonturi', 'bocp' ),
 		'priority' => 26,
