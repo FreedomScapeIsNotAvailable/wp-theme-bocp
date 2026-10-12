@@ -46,8 +46,39 @@ function bocp_fetch_manifest( $force = false ) {
 	if ( 0 !== strpos( $manifest['package'], BOCP_PACKAGE_PREFIX ) ) {
 		return false; // only ever download from the repository itself
 	}
+	if ( isset( $manifest['sha256'] ) && ! preg_match( '/^[a-f0-9]{64}$/i', (string) $manifest['sha256'] ) ) {
+		return false; // a malformed checksum is never trusted
+	}
 	set_site_transient( 'bocp_theme_manifest', $manifest, HOUR_IN_SECONDS );
 	return $manifest;
+}
+
+/**
+ * Verify the release zip against the sha256 in the manifest before WordPress unpacks it. A manifest without a checksum
+ * (older releases) is accepted as before. It catches a corrupted or swapped zip and makes a tampered release visible in the
+ * repository history; it cannot stop someone who controls both the manifest and the zip, so keep 2FA and branch protection on.
+ */
+add_filter( 'upgrader_pre_download', 'bocp_verify_package_hash', 10, 2 );
+function bocp_verify_package_hash( $reply, $package ) {
+	if ( false !== $reply || ! is_string( $package ) || 0 !== strpos( $package, BOCP_PACKAGE_PREFIX ) ) {
+		return $reply;
+	}
+	$manifest = bocp_fetch_manifest();
+	if ( ! $manifest || empty( $manifest['sha256'] ) || $package !== $manifest['package'] ) {
+		return $reply;
+	}
+	if ( ! function_exists( 'download_url' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+	}
+	$file = download_url( $package, 300 );
+	if ( is_wp_error( $file ) ) {
+		return $file;
+	}
+	if ( ! hash_equals( strtolower( (string) $manifest['sha256'] ), hash_file( 'sha256', $file ) ) ) {
+		wp_delete_file( $file );
+		return new WP_Error( 'bocp_package_checksum', 'The downloaded theme package does not match the checksum in the release manifest; update refused.' );
+	}
+	return $file;
 }
 
 function bocp_check_theme_update( $update, $theme_data, $theme_stylesheet, $locales ) {

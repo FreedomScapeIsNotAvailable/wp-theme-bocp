@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.6
+- Security: the release manifest carries a sha256 of the theme zip, and the self-updater refuses a package that does not match it. Release builds are cleaner: build.py zips only tracked theme files.
+
 ## 1.2.5
 - Menus: sub-submenus (level 3) open again. The first-level dropdown had overflow-y:auto, which clipped the side flyouts; dropdowns that contain flyouts no longer scroll or clip, and only the flyout under the pointer stays open (keyboard focus no longer keeps a second one open). Chevrons of level 2+ items keep pointing right when the top item is hovered, and a small hover bridge covers the gap before a flyout.
 - Long menu titles wrap instead of stretching a dropdown across the page (max width 360px).

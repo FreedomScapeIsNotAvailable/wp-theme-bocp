@@ -5,13 +5,16 @@ Build dist/bocp.zip and dist/manifest.json from the bocp/ theme folder.
 Release procedure:
   1. Edit the theme. Bump `Version:` in bocp/style.css AND BOCP_VERSION in bocp/functions.php.
   2. Add a line under the new version in CHANGELOG.md.
-  3. python build.py
-  4. git add -A && git commit -m "Release x.y.z" && git push
+  3. git add -A   (only tracked files are packaged)
+  4. python build.py
+  5. git add -A && git commit -m "Release x.y.z" && git push
 Sites running the theme install the new version automatically within about 12 hours,
 or immediately through the connector's check_updates + update_theme.
 """
+import hashlib
 import json
 import re
+import subprocess
 import zipfile
 from pathlib import Path
 
@@ -47,9 +50,13 @@ if cl.exists():
 DIST.mkdir(exist_ok=True)
 zip_path = DIST / "bocp.zip"
 count = 0
+# Only files git tracks go into the release, never whatever happens to be lying in the working tree (stray, untracked or
+# secret files). New files must be `git add`ed before building.
+tracked = subprocess.run(["git", "ls-files", "-z", "--", "bocp"], cwd=ROOT, capture_output=True, check=True).stdout.decode("utf-8").split("\0")
 with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
-    for path in sorted(THEME.rglob("*")):
-        if path.is_dir() or path.name in SKIP_FILES or any(part in SKIP_DIRS for part in path.relative_to(THEME).parts):
+    for rel in sorted(f for f in tracked if f):
+        path = ROOT / rel
+        if not path.is_file() or path.name in SKIP_FILES or any(part in SKIP_DIRS for part in path.relative_to(THEME).parts):
             continue
         z.write(path, "bocp/" + path.relative_to(THEME).as_posix())
         count += 1
@@ -68,6 +75,7 @@ manifest = {
     "requires": header("Requires at least", "6.0"),
     "requires_php": header("Requires PHP", "7.4"),
     "tested": header("Tested up to", ""),
+    "sha256": hashlib.sha256(versioned.read_bytes()).hexdigest(),  # verified by the updater before the zip is unpacked
     "changelog": changelog,
 }
 (DIST / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
