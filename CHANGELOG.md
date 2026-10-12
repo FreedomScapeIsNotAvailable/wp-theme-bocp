@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.7
+- Default page template: pages whose content is a placeholder for generated sections ({INCLUDE:...} or {bocp_...}), such as the price page, use the full site width instead of the 820px reading column.
+
 ## 1.2.6
 - Security: the release manifest carries a sha256 of the theme zip, and the self-updater refuses a package that does not match it. Release builds are cleaner: build.py zips only tracked theme files.
 

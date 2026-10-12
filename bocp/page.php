@@ -25,7 +25,9 @@ while ( have_posts() ) :
 	}
 
 	$post_content = (string) get_post_field( 'post_content', get_the_ID() );
-	$is_wide      = (bool) preg_match( '/<!--\s*wp:(group|columns|cover|table|html|shortcode)\b/', $post_content )
+	// Content placeholders ({INCLUDE:...} from the AI WP Site Manager plugin, {bocp_...} from the content loader) output
+	// whole HTML sections such as the price tables, so pages that use them are wide too.
+	$is_wide      = (bool) preg_match( '/<!--\s*wp:(group|columns|cover|table|html|shortcode)\b|\{(INCLUDE:|bocp_)/', $post_content )
 		|| 'builder' === get_post_meta( get_the_ID(), '_elementor_edit_mode', true );
 	$is_wide      = (bool) apply_filters( 'bocp_page_wide', $is_wide, get_the_ID() );
 	?>
