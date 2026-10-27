@@ -1118,6 +1118,7 @@ function bocp_render_setup_page() {
 		</ul>
 		<h3 style="margin-top:24px"><?php esc_html_e( 'Clase disponibile pentru blocuri HTML personalizate', 'bocp' ); ?></h3>
 		<p><?php esc_html_e( '.hero, .phero, .wrap, .section / .section-sunken / .section-dark, .kicker, .h-display / .h-2, .lead, .btn.btn-primary/.btn-outline/.btn-secondary, .card.card-pad sau .card.card-lift.mod, .grid.g-2/.g-3/.g-4, .stats/.stat, .flow/.flow-step, .flist/.fitem, .tag, .quote, .cta-band, .infobox, .faq > details.faq-item > summary + .faq-a (acordeon, fără JS), nav.anchor-nav cu linkuri #ancoră (rând de chip-uri).', 'bocp' ); ?></p>
+		<p><?php esc_html_e( 'Meniu: un item din Aspect > Meniuri cu clasa CSS „nav-pill" (câmpul „Clase CSS", activat din Opțiuni ecran) apare ca buton pastilă în culoarea principală, pe desktop și pe mobil — de ex. „Demo".', 'bocp' ); ?></p>
 
 		<h2 style="margin-top:32px"><?php esc_html_e( 'Coloanele din footer', 'bocp' ); ?></h2>
 		<p>

@@ -209,6 +209,13 @@ h1,h2,h3,h4,p { margin: 0; }
    keep the theme's buttons white-on-primary regardless. */
 body .nav-cta .btn-primary, body .drawer-cta .btn-primary, body .nav-cta .btn-primary:hover, body .drawer-cta .btn-primary:hover { color: #fff; }
 body .nav-cta .btn-outline, body .drawer-cta .btn-outline { color: var(--text-strong); }
+
+/* Menu item with the CSS class "nav-pill" (Appearance > Menus): a primary-colour pill, e.g. "Demo".
+   Scoped under body so the Customizer menu-link colour and page-builder link colours don't recolour it. */
+body .nav-links .nav-link.nav-pill { margin-left: 6px; padding: 8px 18px; border-radius: var(--radius-pill); background: var(--color-primary); color: var(--text-on-primary); font-weight: 600; }
+body .nav-links .nav-link.nav-pill:hover, body .nav-links .nav-link.nav-pill.is-active { background: var(--color-primary-hover); color: var(--text-on-primary); }
+body .drawer-links .drawer-link.nav-pill { justify-content: center; margin-top: 6px; border-radius: var(--radius-pill); background: var(--color-primary); color: var(--text-on-primary); font-weight: 600; }
+body .drawer-links .drawer-link.nav-pill:hover, body .drawer-links .drawer-link.nav-pill.is-active { background: var(--color-primary-hover); color: var(--text-on-primary); }
 @media (max-width: 685px) {
   .entry-content .wp-block-table { font-size: 90%; }
   .entry-content .wp-block-table td, .entry-content .wp-block-table th { padding: 6px 8px; }

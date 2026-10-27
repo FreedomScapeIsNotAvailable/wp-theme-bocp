@@ -39,6 +39,21 @@ function bocp_menu_item_has_children( $item ) {
 	return in_array( 'menu-item-has-children', (array) $item->classes, true );
 }
 
+/**
+ * The admin's own classes from the item's "CSS Classes" field in Appearance > Menus
+ * (e.g. "nav-pill"), without the menu-item-* / current-* classes WP core adds.
+ */
+function bocp_menu_item_custom_classes( $item ) {
+	$custom = array();
+	foreach ( (array) $item->classes as $class ) {
+		if ( '' === $class || preg_match( '/^(menu-item|current[-_]|page[-_]item)/', $class ) ) {
+			continue;
+		}
+		$custom[] = $class;
+	}
+	return $custom;
+}
+
 /** Items whose link is "#" or empty only exist to open their submenu. */
 function bocp_menu_item_is_placeholder( $item ) {
 	$url = trim( (string) $item->url );
@@ -53,7 +68,7 @@ class BOCP_Nav_Walker extends Walker_Nav_Menu {
 			$output .= 0 === $depth ? '<div class="nav-item has-dropdown">' : '<div class="nav-sub has-flyout">';
 		}
 
-		$classes = array( 0 === $depth ? 'nav-link' : 'nav-dropdown-link' );
+		$classes = array_merge( array( 0 === $depth ? 'nav-link' : 'nav-dropdown-link' ), bocp_menu_item_custom_classes( $item ) );
 		if ( $has_children && $depth > 0 ) {
 			$classes[] = 'has-children';
 		}
@@ -94,7 +109,7 @@ class BOCP_Drawer_Walker extends Walker_Nav_Menu {
 			$output .= '<div class="drawer-item-row">';
 		}
 
-		$classes = array( 0 === $depth ? 'drawer-link' : 'drawer-sublink' );
+		$classes = array_merge( array( 0 === $depth ? 'drawer-link' : 'drawer-sublink' ), bocp_menu_item_custom_classes( $item ) );
 		if ( bocp_menu_item_is_active( $item ) ) {
 			$classes[] = 'is-active';
 		}

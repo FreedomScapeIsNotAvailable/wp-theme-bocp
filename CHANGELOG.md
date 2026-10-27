@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.8
+- Menus: the "CSS Classes" field of a menu item now reaches the link in the header and the mobile drawer. New class `nav-pill` shows the item as a primary-colour pill button (e.g. "Demo" to the contact page), unaffected by the menu-link colour option.
+
 ## 1.2.7
 - Default page template: pages whose content is a placeholder for generated sections ({INCLUDE:...} or {bocp_...}), such as the price page, use the full site width instead of the 820px reading column.
 
