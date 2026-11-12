@@ -58,6 +58,29 @@ function bocp_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'bocp_enqueue_assets' );
 
 /**
+ * Google tag from the Customizer (BOCP — Google tag). Same markup and ids
+ * as Site Kit's snippet (google_gtagjs / google_gtagjs-inline), so a
+ * consent plugin such as CookieAdmin recognises and blocks it until the
+ * visitor accepts analytics cookies.
+ */
+function bocp_print_google_tag() {
+	$tag_id = bocp_sanitize_google_tag_id( get_theme_mod( 'bocp_google_tag_id', '' ) );
+	if ( '' === $tag_id || is_user_logged_in() ) {
+		return;
+	}
+	wp_print_script_tag( array(
+		'async' => true,
+		'id'    => 'google_gtagjs',
+		'src'   => 'https://www.googletagmanager.com/gtag/js?id=' . rawurlencode( $tag_id ),
+	) );
+	wp_print_inline_script_tag(
+		"window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '" . esc_js( $tag_id ) . "');",
+		array( 'id' => 'google_gtagjs-inline' )
+	);
+}
+add_action( 'wp_head', 'bocp_print_google_tag', 5 );
+
+/**
  * Builds the small :root override block driven by Customizer values
  * (brand colors + optional system-font fallback). Everything else in the
  * design system (spacing, radius, shadows, neutrals) is left untouched.

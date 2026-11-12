@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.9
+- Customizer: optional Google tag ID (BOCP, Google tag). When set, the theme prints the gtag.js snippet in the head for visitors who are not logged in, with the same ids as Site Kit's snippet so CookieAdmin blocks it until analytics consent. Leave it empty on sites where Site Kit already prints the tag.
+
 ## 1.2.8
 - Menus: the "CSS Classes" field of a menu item now reaches the link in the header and the mobile drawer. New class `nav-pill` shows the item as a primary-colour pill button (e.g. "Demo" to the contact page), unaffected by the menu-link colour option.
 

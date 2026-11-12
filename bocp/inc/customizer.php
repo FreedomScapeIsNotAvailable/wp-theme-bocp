@@ -176,9 +176,33 @@ function bocp_customize_register( $wp_customize ) {
 
 	// Footer columns (Logo/Module/Companie/Contact) are widget areas now —
 	// Aspect > Widgets — not Customizer fields; much easier to rearrange.
+
+	/* ---------------- Google tag ---------------- */
+	$wp_customize->add_section( 'bocp_tracking', array(
+		'title'    => __( 'BOCP — Google tag', 'bocp' ),
+		'priority' => 29,
+	) );
+
+	$wp_customize->add_setting( 'bocp_google_tag_id', array(
+		'default'           => '',
+		'sanitize_callback' => 'bocp_sanitize_google_tag_id',
+		'transport'         => 'refresh',
+	) );
+	$wp_customize->add_control( 'bocp_google_tag_id', array(
+		'type'        => 'text',
+		'label'       => __( 'ID Google tag (ex. G-XXXXXXXXXX)', 'bocp' ),
+		'description' => __( 'Lasă gol dacă tag-ul vine din alt plugin (ex. Site Kit). Vizitatorii autentificați nu sunt urmăriți.', 'bocp' ),
+		'section'     => 'bocp_tracking',
+	) );
 }
 add_action( 'customize_register', 'bocp_customize_register' );
 
 function bocp_sanitize_font_choice( $value ) {
 	return in_array( $value, array( 'plex', 'system' ), true ) ? $value : 'plex';
+}
+
+/** Accepts G-, GT- and AW- tag ids only; anything else is stored as empty. */
+function bocp_sanitize_google_tag_id( $value ) {
+	$value = strtoupper( trim( (string) $value ) );
+	return preg_match( '/^(G|GT|AW)-[A-Z0-9]{4,20}$/', $value ) ? $value : '';
 }

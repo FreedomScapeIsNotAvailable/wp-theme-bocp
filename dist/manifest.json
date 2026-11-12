@@ -1,11 +1,11 @@
 {
   "name": "BOCP",
   "slug": "bocp",
-  "version": "1.2.8",
-  "package": "https://raw.githubusercontent.com/FreedomScapeIsNotAvailable/wp-theme-bocp/main/dist/bocp-1.2.8.zip",
+  "version": "1.2.9",
+  "package": "https://raw.githubusercontent.com/FreedomScapeIsNotAvailable/wp-theme-bocp/main/dist/bocp-1.2.9.zip",
   "requires": "6.0",
   "requires_php": "7.4",
   "tested": "6.7",
-  "sha256": "033d1e23a3cf896660b2ec13d897a168b2d8a71a302a7136e7f573f4db591c59",
-  "changelog": "<h4>1.2.8</h4><ul><li>Menus: the \"CSS Classes\" field of a menu item now reaches the link in the header and the mobile drawer. New class `nav-pill` shows the item as a primary-colour pill button (e.g. \"Demo\" to the contact page), unaffected by the menu-link colour option.</li></ul>"
+  "sha256": "471249569f775b6a2873190cbc91be3b9c4bdd915b93200e9be2e9aa34cc3ca3",
+  "changelog": "<h4>1.2.9</h4><ul><li>Customizer: optional Google tag ID (BOCP, Google tag). When set, the theme prints the gtag.js snippet in the head for visitors who are not logged in, with the same ids as Site Kit's snippet so CookieAdmin blocks it until analytics consent. Leave it empty on sites where Site Kit already prints the tag.</li></ul>"
 }
