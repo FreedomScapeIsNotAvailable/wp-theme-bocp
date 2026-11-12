@@ -179,7 +179,7 @@ function bocp_customize_register( $wp_customize ) {
 
 	/* ---------------- Google tag ---------------- */
 	$wp_customize->add_section( 'bocp_tracking', array(
-		'title'    => __( 'BOCP — Google tag', 'bocp' ),
+		'title'    => __( 'Google tag', 'bocp' ),
 		'priority' => 29,
 	) );
 

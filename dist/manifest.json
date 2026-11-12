@@ -1,11 +1,11 @@
 {
   "name": "BOCP",
   "slug": "bocp",
-  "version": "1.2.9",
-  "package": "https://raw.githubusercontent.com/FreedomScapeIsNotAvailable/wp-theme-bocp/main/dist/bocp-1.2.9.zip",
+  "version": "1.2.10",
+  "package": "https://raw.githubusercontent.com/FreedomScapeIsNotAvailable/wp-theme-bocp/main/dist/bocp-1.2.10.zip",
   "requires": "6.0",
   "requires_php": "7.4",
   "tested": "6.7",
-  "sha256": "471249569f775b6a2873190cbc91be3b9c4bdd915b93200e9be2e9aa34cc3ca3",
-  "changelog": "<h4>1.2.9</h4><ul><li>Customizer: optional Google tag ID (BOCP, Google tag). When set, the theme prints the gtag.js snippet in the head for visitors who are not logged in, with the same ids as Site Kit's snippet so CookieAdmin blocks it until analytics consent. Leave it empty on sites where Site Kit already prints the tag.</li></ul>"
+  "sha256": "8eb66542a53996705c29fa66097953e53660a544f16f1af36fab23fb5bd0e0bf",
+  "changelog": "<h4>1.2.10</h4><ul><li>Customizer: the Google tag section is named just \"Google tag\".</li></ul>"
 }

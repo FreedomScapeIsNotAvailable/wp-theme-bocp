@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.10
+- Customizer: the Google tag section is named just "Google tag".
+
 ## 1.2.9
 - Customizer: optional Google tag ID (BOCP, Google tag). When set, the theme prints the gtag.js snippet in the head for visitors who are not logged in, with the same ids as Site Kit's snippet so CookieAdmin blocks it until analytics consent. Leave it empty on sites where Site Kit already prints the tag.
 

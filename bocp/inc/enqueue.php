@@ -58,7 +58,7 @@ function bocp_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'bocp_enqueue_assets' );
 
 /**
- * Google tag from the Customizer (BOCP — Google tag). Same markup and ids
+ * Google tag from the Customizer (section Google tag). Same markup and ids
  * as Site Kit's snippet (google_gtagjs / google_gtagjs-inline), so a
  * consent plugin such as CookieAdmin recognises and blocks it until the
  * visitor accepts analytics cookies.
