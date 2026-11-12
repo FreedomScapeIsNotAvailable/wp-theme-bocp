@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.12
+- Google tag: LiteSpeed Cache keeps a separate page copy per CookieAdmin consent cookie, so a page cached for a visitor who accepted is never served to one who did not.
+
 ## 1.2.11
 - Google tag: with the CookieAdmin plugin active, the tag is printed already blocked (analytics category) until the visitor accepts analytics cookies, so it never loads before consent, even on a site where no cookie scan has been run.
 

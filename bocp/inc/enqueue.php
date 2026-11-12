@@ -96,6 +96,18 @@ function bocp_has_analytics_consent() {
 add_action( 'wp_head', 'bocp_print_google_tag', 5 );
 
 /**
+ * The page HTML differs by CookieAdmin consent (blocked or live tag), so
+ * LiteSpeed Cache must keep a separate copy per consent cookie value.
+ */
+function bocp_google_tag_vary_cookies( $cookies ) {
+	if ( defined( 'COOKIEADMIN_VERSION' ) && '' !== bocp_sanitize_google_tag_id( get_theme_mod( 'bocp_google_tag_id', '' ) ) ) {
+		$cookies[] = 'cookieadmin_consent';
+	}
+	return $cookies;
+}
+add_filter( 'litespeed_vary_curr_cookies', 'bocp_google_tag_vary_cookies' );
+
+/**
  * Builds the small :root override block driven by Customizer values
  * (brand colors + optional system-font fallback). Everything else in the
  * design system (spacing, radius, shadows, neutrals) is left untouched.

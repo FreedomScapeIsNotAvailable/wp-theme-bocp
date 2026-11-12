@@ -1,11 +1,11 @@
 {
   "name": "BOCP",
   "slug": "bocp",
-  "version": "1.2.11",
-  "package": "https://raw.githubusercontent.com/FreedomScapeIsNotAvailable/wp-theme-bocp/main/dist/bocp-1.2.11.zip",
+  "version": "1.2.12",
+  "package": "https://raw.githubusercontent.com/FreedomScapeIsNotAvailable/wp-theme-bocp/main/dist/bocp-1.2.12.zip",
   "requires": "6.0",
   "requires_php": "7.4",
   "tested": "6.7",
-  "sha256": "c920850eea18442bb73eccf9e72bb8feb05256f6dd2926f511e857bd498d8549",
-  "changelog": "<h4>1.2.11</h4><ul><li>Google tag: with the CookieAdmin plugin active, the tag is printed already blocked (analytics category) until the visitor accepts analytics cookies, so it never loads before consent, even on a site where no cookie scan has been run.</li></ul>"
+  "sha256": "9a9d41114fd30a23a19913b5eb478b3ee4590b51f1468390744b817d804f628b",
+  "changelog": "<h4>1.2.12</h4><ul><li>Google tag: LiteSpeed Cache keeps a separate page copy per CookieAdmin consent cookie, so a page cached for a visitor who accepted is never served to one who did not.</li></ul>"
 }
