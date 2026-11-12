@@ -59,24 +59,39 @@ add_action( 'wp_enqueue_scripts', 'bocp_enqueue_assets' );
 
 /**
  * Google tag from the Customizer (section Google tag). Same markup and ids
- * as Site Kit's snippet (google_gtagjs / google_gtagjs-inline), so a
- * consent plugin such as CookieAdmin recognises and blocks it until the
- * visitor accepts analytics cookies.
+ * as Site Kit's snippet (google_gtagjs / google_gtagjs-inline). With the
+ * CookieAdmin plugin active and no analytics consent yet, both tags are
+ * printed already blocked (type text/plain, category analytics): CookieAdmin
+ * runs them when the visitor accepts, without needing a cookie scan first.
  */
 function bocp_print_google_tag() {
 	$tag_id = bocp_sanitize_google_tag_id( get_theme_mod( 'bocp_google_tag_id', '' ) );
 	if ( '' === $tag_id || is_user_logged_in() ) {
 		return;
 	}
-	wp_print_script_tag( array(
+	$blocked = defined( 'COOKIEADMIN_VERSION' ) && ! bocp_has_analytics_consent();
+	$extra   = $blocked ? array( 'type' => 'text/plain', 'data-cookieadmin-category' => 'analytics' ) : array();
+	wp_print_script_tag( array_merge( $extra, array(
 		'async' => true,
 		'id'    => 'google_gtagjs',
 		'src'   => 'https://www.googletagmanager.com/gtag/js?id=' . rawurlencode( $tag_id ),
-	) );
+	) ) );
 	wp_print_inline_script_tag(
 		"window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '" . esc_js( $tag_id ) . "');",
-		array( 'id' => 'google_gtagjs-inline' )
+		array_merge( $extra, array( 'id' => 'google_gtagjs-inline' ) )
 	);
+}
+
+/** True when CookieAdmin's consent cookie accepts all or the analytics category. */
+function bocp_has_analytics_consent() {
+	if ( empty( $_COOKIE['cookieadmin_consent'] ) ) {
+		return false;
+	}
+	$consent = json_decode( wp_unslash( $_COOKIE['cookieadmin_consent'] ), true );
+	if ( ! is_array( $consent ) || ( isset( $consent['reject'] ) && 'true' === $consent['reject'] ) ) {
+		return false;
+	}
+	return ( isset( $consent['accept'] ) && 'true' === $consent['accept'] ) || ( isset( $consent['analytics'] ) && 'true' === $consent['analytics'] );
 }
 add_action( 'wp_head', 'bocp_print_google_tag', 5 );
 

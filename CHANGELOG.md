@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.11
+- Google tag: with the CookieAdmin plugin active, the tag is printed already blocked (analytics category) until the visitor accepts analytics cookies, so it never loads before consent, even on a site where no cookie scan has been run.
+
 ## 1.2.10
 - Customizer: the Google tag section is named just "Google tag".
 
