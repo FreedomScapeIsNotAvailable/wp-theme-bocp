@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BOCP_VERSION', '1.2.12' );
+define( 'BOCP_VERSION', '1.2.13' );
 define( 'BOCP_DIR', get_template_directory() );
 define( 'BOCP_URI', get_template_directory_uri() );
 

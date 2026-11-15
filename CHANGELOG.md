@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.13
+- Posts page (Settings › Reading › Posts page): new `home.php` prints the posts page title as the single H1 (with its excerpt as lead) above the post cards; before, the fallback `index.php` had no heading.
+
 ## 1.2.12
 - Google tag: LiteSpeed Cache keeps a separate page copy per CookieAdmin consent cookie, so a page cached for a visitor who accepted is never served to one who did not.
 
