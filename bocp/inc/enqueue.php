@@ -108,6 +108,31 @@ function bocp_google_tag_vary_cookies( $cookies ) {
 add_filter( 'litespeed_vary_curr_cookies', 'bocp_google_tag_vary_cookies' );
 
 /**
+ * Microsoft UET consent mode driven by CookieAdmin. Printed first in the head,
+ * before any UET tag (e.g. the Microsoft Advertising UET plugin), it sets
+ * ad_storage to denied until the visitor accepts all cookies or the marketing
+ * category, and sends an update when the choice changes on the page. Decided in
+ * the browser, so cached pages need no consent variant. Harmless without UET.
+ */
+function bocp_print_uet_consent() {
+	if ( ! defined( 'COOKIEADMIN_VERSION' ) || is_admin() ) {
+		return;
+	}
+	$js = "(function(w,d){w.uetq=w.uetq||[];"
+		. "function s(){var m=d.cookie.match(/(?:^|;\\s*)cookieadmin_consent=([^;]*)/),c;if(!m){return null;}"
+		. "try{c=JSON.parse(decodeURIComponent(m[1]));}catch(e){return null;}"
+		. "if(!c||c.reject==='true'){return 'denied';}"
+		. "return(c.accept==='true'||c.marketing==='true')?'granted':'denied';}"
+		. "var l=s()||'denied';w.uetq.push('consent','default',{'ad_storage':l});"
+		. "function u(){var n=s();if(n&&n!==l){l=n;w.uetq.push('consent','update',{'ad_storage':n});}}"
+		. "d.addEventListener('click',function(e){var t=e.target;"
+		. "if(t&&t.closest&&t.closest('.cookieadmin_accept_btn,.cookieadmin_reject_btn,.cookieadmin_save_btn')){setTimeout(u,300);}},true);"
+		. "})(window,document);";
+	wp_print_inline_script_tag( $js, array( 'id' => 'bocp-uet-consent', 'data-no-optimize' => '1' ) );
+}
+add_action( 'wp_head', 'bocp_print_uet_consent', 0 );
+
+/**
  * Builds the small :root override block driven by Customizer values
  * (brand colors + optional system-font fallback). Everything else in the
  * design system (spacing, radius, shadows, neutrals) is left untouched.

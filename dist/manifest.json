@@ -1,11 +1,11 @@
 {
-    "name": "BOCP",
-    "slug": "bocp",
-    "version": "1.2.13",
-    "package": "https://raw.githubusercontent.com/FreedomScapeIsNotAvailable/wp-theme-bocp/main/dist/bocp-1.2.13.zip",
-    "requires": "6.0",
-    "requires_php": "7.4",
-    "tested": "6.7",
-    "sha256": "bcd9b766f6aaebf3946cba1c31808e1ec25ead49930c6b4142aef6ccddd70e35",
-    "changelog": "<h4>1.2.13</h4><ul><li>Posts page (Settings \u203a Reading \u203a Posts page): new `home.php` prints the posts page title as the single H1 (with its excerpt as lead) above the post cards; before, the fallback `index.php` had no heading.</li></ul>"
+  "name": "BOCP",
+  "slug": "bocp",
+  "version": "1.2.14",
+  "package": "https://raw.githubusercontent.com/FreedomScapeIsNotAvailable/wp-theme-bocp/main/dist/bocp-1.2.14.zip",
+  "requires": "6.0",
+  "requires_php": "7.4",
+  "tested": "6.7",
+  "sha256": "c50543d9c3827b207793c70c9e57f7f30673d0446df6ac05a7fcb837ff9534c0",
+  "changelog": "<h4>1.2.14</h4><ul><li>Microsoft UET consent mode: with the CookieAdmin plugin active, the head starts with a small script that sets UET ad_storage to denied until the visitor accepts all cookies or the marketing category, and sends a consent update when the choice changes on the page. Needed for Microsoft Advertising measurement and remarketing in the EEA; harmless on sites without a UET tag.</li></ul>"
 }

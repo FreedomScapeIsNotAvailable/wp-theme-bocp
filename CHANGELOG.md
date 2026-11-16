@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.14
+- Microsoft UET consent mode: with the CookieAdmin plugin active, the head starts with a small script that sets UET ad_storage to denied until the visitor accepts all cookies or the marketing category, and sends a consent update when the choice changes on the page. Needed for Microsoft Advertising measurement and remarketing in the EEA; harmless on sites without a UET tag.
+
 ## 1.2.13
 - Posts page (Settings › Reading › Posts page): new `home.php` prints the posts page title as the single H1 (with its excerpt as lead) above the post cards; before, the fallback `index.php` had no heading.
 
