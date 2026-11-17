@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.15
+- Microsoft UET consent mode: after a click on the CookieAdmin banner, the consent update now waits for the consent cookie to change (checked every 250 ms, up to 10 s). CookieAdmin Pro writes the cookie only after its AJAX save returns, so the single check at 300 ms in 1.2.14 ran too early and the update was never sent.
+
 ## 1.2.14
 - Microsoft UET consent mode: with the CookieAdmin plugin active, the head starts with a small script that sets UET ad_storage to denied until the visitor accepts all cookies or the marketing category, and sends a consent update when the choice changes on the page. Needed for Microsoft Advertising measurement and remarketing in the EEA; harmless on sites without a UET tag.
 
